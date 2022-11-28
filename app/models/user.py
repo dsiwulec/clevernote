@@ -15,8 +15,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    notes = db.relationship("Note", back_populates="user")
-    notebooks = db.relationship("Notebook", back_populates="user")
+    notes = db.relationship("Note", back_populates="user", cascade="all, delete-orphan")
+    notebooks = db.relationship(
+        "Notebook", back_populates="user", cascade="all, delete-orphan"
+    )
 
     @property
     def password(self):
