@@ -1,0 +1,66 @@
+#login-form {
+    width: 400px;
+    background-color: white;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.auth-form-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-form-name {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif
+}
+
+.auth-form-hippo {
+    font-size: 50px;
+}
+
+.auth-button {
+    height: 55px;
+    width: 315px;
+    background-color: #00a82d;
+    border-radius: 8px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#login-no-account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-no-account>span {
+    color: #737373;
+}
+
+#login-no-account>button {
+    color: #00a82d;
+}
+
+#login-form-header-subtext {
+    color: #333333;
+}
+
+.auth-input>input {
+    height: 50px;
+    width: 300px;
+    border: none;
+    font-size: 16px;
+}
+
+.char-count {
+    text-align: right;
+    color: #737373;
+    font-size: 13px;
+}

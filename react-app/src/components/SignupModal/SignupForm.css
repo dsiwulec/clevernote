@@ -1,0 +1,10 @@
+#signup-form {
+    width: 400px;
+    background-color: white;
+    height: 725px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 5px;
+}
