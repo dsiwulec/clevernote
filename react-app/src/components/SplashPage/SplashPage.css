@@ -1,0 +1,110 @@
+#splash-page-container {
+    height: 100vh;
+    width: 100vw;
+    max-width: 1220px;
+    margin: auto;
+}
+
+#splash-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    padding: 0px 20px;
+}
+
+#splash-login-button {
+    height: 40px;
+    width: 120px;
+}
+
+#splash-login-button {
+    border: 2px solid #00a82d;
+    border-radius: 3px;
+    color: #00a82d;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#splash-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#splash-logo>span {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.fa-hippo {
+    color: #00a82d;
+    font-size: 40px;
+}
+
+#splash-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#splash-text>h1 {
+    font-size: 56px;
+}
+
+#splash-text>h2 {
+    font-size: 24px;
+    font-weight: 300;
+    width: 975px;
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+#splash-signup-button {
+    height: 55px;
+    width: 300px;
+    background-color: #00a82d;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
+#splash-login-under-signup {
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+#splash-image {
+    display: flex;
+    align-items: center;
+    margin: 30px 0px;
+}
+
+#splash-image>img {
+    height: 100%;
+    width: 100%;
+    max-width: 980px;
+}
+
+#splash-image-text {
+    width: 240px;
+    min-width: 240px;
+}
+
+.splash-image-header-text {
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.splash-image-body-text {
+    font-size: 16px;
+    height: 72px;
+}

@@ -1,0 +1,23 @@
+#nav-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#sidebar-container * {
+    color: #a6a6a6;
+}
+
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-nav-link-icon {
+    width: 25px;
+    margin-left: 18px;
+}
+
+#dropdown-menu-toggle {
+    margin-left: 18px;
+}
