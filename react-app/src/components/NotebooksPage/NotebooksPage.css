@@ -1,0 +1,81 @@
+.notebooks-content {
+    margin-left: 30px
+}
+
+#notebooks-header-container {
+    position: sticky;
+    top: 0px;
+    background-color: white;
+}
+
+#notebooks-overall-header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+#notebooks-content-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 30px;
+    border-bottom: 2px solid #5b6b70;
+    padding-bottom: 15px;
+}
+
+.notebooks-number {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#new-notebook-button {
+    font-size: 14px;
+    color: #00a82d;
+}
+
+#new-notebook-button>.fa-plus {
+    margin-right: 5px;
+}
+
+#notebooks-overall-header {
+    font-size: 20px;
+}
+
+#notebooks-content-header {
+    padding-top: 12px;
+}
+
+#notebook-table-container {
+    display: flex;
+    margin: 0px 40px;
+    flex: 1;
+    justify-content: space-between;
+    /* overflow: auto;
+    height: calc(100vh - 145px); */
+}
+
+.column-header {
+    font-size: 11px;
+    color: #B3B3B3;
+    height: 25px;
+    margin-bottom: 10px;
+    position: sticky;
+    top: 129px;
+    display: flex;
+    align-items: flex-end;
+    background-color: white;
+}
+
+.title-column-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #777777;
+    margin: 20px 0px 20px 10px;
+    font-size: 14px;
+}
+
+.column-content {
+    color: #777777;
+    margin: 20px 0px;
+    font-size: 14px;
+}

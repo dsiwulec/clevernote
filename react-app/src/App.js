@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SplashPage from './components/SplashPage/SplashPage';
 import HomePage from './components/HomePage/HomePage';
+import NotesPage from './components/NotesPage/NotesPage';
+import NotebooksPage from './components/NotebooksPage/NotebooksPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 
@@ -26,10 +28,10 @@ function App() {
     <BrowserRouter>
       <Switch>
         <ProtectedRoute path='/notes' exact={true}>
-          {/* <NotesPage /> */}
+          <NotesPage />
         </ProtectedRoute>
         <ProtectedRoute path='/notebooks' exact={true}>
-          {/* <NotebooksPage /> */}
+          <NotebooksPage />
         </ProtectedRoute>
         <Route path='/' exact={true} >
           {user ?

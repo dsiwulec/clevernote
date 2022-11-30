@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
-from datetime import datetime
+import datetime
 from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
 from app.models import Note, db
@@ -49,6 +49,7 @@ def create_note():
             title=form.data["title"],
             text=form.data["text"],
         )
+        new_note.set_created()
         db.session.add(new_note)
         db.session.commit()
         return new_note.to_dict(), 201
@@ -82,7 +83,7 @@ def update_note(id):
                 current_note.title = form.data["title"]
             if form.data["text"]:
                 current_note.text = form.data["text"]
-            current_note.updated_at = datetime.utcnow()
+            current_note.set_updated()
             db.session.commit()
             return current_note.to_dict()
 

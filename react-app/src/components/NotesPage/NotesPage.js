@@ -1,9 +1,9 @@
 import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
-import './HomePage.css'
+import './NotesPage.css'
 
 
-const HomePage = () => {
+const NotesPage = () => {
 
     return (
         <div className='main-container'>
@@ -16,4 +16,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage;
+export default NotesPage;

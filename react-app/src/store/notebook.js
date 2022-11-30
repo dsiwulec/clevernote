@@ -27,32 +27,44 @@ const removeNotebook = notebookId => ({
 
 
 // Thunks
-export const createNewNotebook = note => async dispatch => {
-    const response = await fetch('/api/notebooks', { method: 'POST' })
+export const createNewNotebook = name => async dispatch => {
+    const response = await fetch('/api/notebooks/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name })
+    })
 
     if (response.ok) {
-        dispatch(addNotebook(note))
+        const newNotebook = await response.json()
+        dispatch(addNotebook(newNotebook))
+        return newNotebook
     }
 }
 
-export const getAllNotebooks = notebooks => async dispatch => {
+export const getAllNotebooks = () => async dispatch => {
     const response = await fetch('/api/notebooks')
 
     if (response.ok) {
+        const notebooks = await response.json()
         dispatch(loadNotebooks(notebooks))
+        return notebooks
+    } else {
+        const errors = await response.json()
+        return errors;
     }
 }
 
 export const updateNotebook = notebook => async dispatch => {
-    const response = await fetch(`/api/notes/${notebook.id}`, { method: 'PUT' })
+    const response = await fetch(`/api/notebooks/${notebook.id}`, { method: 'PUT' })
 
     if (response.ok) {
-        dispatch(editNotebook({ title: note.title, text: note.text }))
+        const notebook = await response.json()
+        dispatch(editNotebook(notebook))
     }
 }
 
 export const deleteNotebook = notebookId => async dispatch => {
-    const response = await fetch(`/api/notes/${notebookId}`, { method: 'DELETE' })
+    const response = await fetch(`/api/notebooks/${notebookId}`, { method: 'DELETE' })
 
     if (response.ok) {
         dispatch(removeNotebook(notebookId))
@@ -60,26 +72,26 @@ export const deleteNotebook = notebookId => async dispatch => {
 }
 
 // Reducer
-const notebookReducer = (state = { notebooks: {} }, action) => {
+const notebookReducer = (state = {}, action) => {
     switch (action.type) {
         case CREATE_NOTEBOOK: {
-            state.notebooks[action.notebook.id] = action.notebook
-            return { notebooks: { ...state.notebooks } }
+            state[action.notebook.id] = action.notebook
+            return { ...state }
         }
 
         case LOAD_NOTEBOOKS: {
-            action.notebooks.Notebooks.forEach(notebook => state.notebooks[notebook.id] = notebook)
-            return { notebooks: { ...state.notebooks } }
+            action.notebooks.Notebooks.forEach(notebook => state[notebook.id] = notebook)
+            return { ...state }
         }
 
         case UPDATE_NOTEBOOK: {
-            state.notebooks[action.notebook.id] = notebook
-            return { notebooks: { ...state.notebooks } }
+            state[action.notebook.id] = action.notebook
+            return { ...state }
         }
 
         case DELETE_NOTEBOOK: {
-            delete state.notebooks[action.notebook.id]
-            return { notebooks: { ...state.notebooks } }
+            delete state[action.notebookId]
+            return { ...state }
         }
 
         default:

@@ -70,33 +70,33 @@ export const deleteNotebookNotes = notebookId => async dispatch => dispatch(remo
 
 
 // Reducer
-const noteReducer = (state = { notes: {} }, action) => {
+const noteReducer = (state = {}, action) => {
     switch (action.type) {
         case CREATE_NOTE: {
-            state.notes[action.note.id] = action.note
-            return { notes: { ...state.notes } }
+            state[action.note.id] = action.note
+            return { ...state }
         }
 
         case LOAD_NOTES: {
-            action.notes.Notes.forEach(note => state.notes[note.id] = note)
-            return { notes: { ...state.notes } }
+            action.notes.Notes.forEach(note => state[note.id] = note)
+            return { ...state.notes }
         }
 
         case UPDATE_NOTE: {
-            state.notes[action.note.id] = note
-            return { notes: { ...state.notes } }
+            state[action.note.id] = action.note
+            return { ...state.notes }
         }
 
         case DELETE_NOTE: {
-            delete state.notes[action.note.id]
-            return { notes: { ...state.notes } }
+            delete state[action.note.id]
+            return { ...state }
         }
 
         case DELETE_NOTEBOOK_NOTES: {
-            for (const note in state.notes) {
-                if (note.notebookId === action.notebookId) delete state.notes[note.id]
+            for (const note in state) {
+                if (note.notebookId === action.notebookId) delete state[note.id]
             }
-            return { notes: { ...state.notes } }
+            return { ...state.notes }
         }
 
         default:

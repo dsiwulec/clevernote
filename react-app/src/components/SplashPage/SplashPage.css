@@ -81,21 +81,26 @@
     text-decoration: underline;
 }
 
-#splash-image {
+#splash-image-container {
     display: flex;
     align-items: center;
     margin: 30px 0px;
 }
 
+#splash-image {
+    flex: 1;
+}
+
 #splash-image>img {
-    height: 100%;
     width: 100%;
+    flex: 1;
     max-width: 980px;
 }
 
 #splash-image-text {
     width: 240px;
     min-width: 240px;
+    margin-right: 20px;
 }
 
 .splash-image-header-text {
@@ -107,4 +112,10 @@
 .splash-image-body-text {
     font-size: 16px;
     height: 72px;
+}
+
+#header-auth {
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
