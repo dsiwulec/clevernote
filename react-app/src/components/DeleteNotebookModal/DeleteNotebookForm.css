@@ -1,0 +1,54 @@
+#delete-notebook-form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 4px;
+    height: 225px;
+    width: 575px;
+}
+
+#confirm-delete-header {
+    font-size: 20px;
+    color: #333333;
+    font-weight: 500;
+    margin: 0px 30px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+}
+
+#confirm-delete-text {
+    font-size: 15px;
+    color: #333333;
+    margin: 0px 30px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+}
+
+.delete-notebook-footer {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid #d9d9d9;
+    margin: 0;
+}
+
+.delete-cancel-button {
+    height: 40px;
+    width: 80px;
+    border: 1px solid #737373;
+    color: #737373;
+    border-radius: 5px;
+}
+
+.submit-delete-button {
+    height: 40px;
+    width: 80px;
+    background-color: #e54e40;
+    color: white;
+    border-radius: 5px;
+    margin-right: 30px;
+}

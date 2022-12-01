@@ -1,7 +1,10 @@
+#sidebar-container {
+    flex: 1;
+}
+
 #nav-container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
 }
 
 #sidebar-container * {
@@ -11,6 +14,11 @@
 .sidebar-nav-link {
     display: flex;
     align-items: center;
+    height: 40px;
+}
+
+.sidebar-nav-link:hover {
+    background-color: #404040;
 }
 
 .sidebar-nav-link-icon {
@@ -20,4 +28,87 @@
 
 #dropdown-menu-toggle {
     margin-left: 18px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#dropdown-menu-toggle .fa-circle-user {
+    font-size: 28px;
+    width: 25px;
+}
+
+#dropdown-menu-toggle span {
+    font-size: 14px;
+    margin-left: 15px;
+}
+
+#dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 150px;
+    width: 265px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    position: absolute;
+}
+
+#dropdown-menu>* {
+    margin-left: 18px;
+}
+
+#dropdown-menu .fa-circle-user {
+    font-size: 32px;
+    width: 32px;
+}
+
+#dropdown-menu .fa-check {
+    font-size: 17px;
+    color: #026fac;
+}
+
+#dropdown-menu span {
+    font-size: 14px;
+}
+
+#dropdown-menu-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#dropdown-menu-user-email {
+    display: flex;
+    flex-direction: column;
+}
+
+#logout-button {
+    align-self: flex-start;
+    color: black;
+}
+
+#sidebar-new-note-button-container {
+    width: 240px;
+    display: flex;
+    justify-content: center;
+}
+
+#sidebar-new-note-button {
+    height: 36px;
+    width: 216px;
+    background-color: #00a82d;
+    border-radius: 50px;
+    text-align: left;
+    padding-left: 10px;
+    margin: 15px 0px;
+}
+
+#sidebar-new-note-button * {
+    color: white;
+    padding-right: 10px;
+    font-size: 14px;
 }

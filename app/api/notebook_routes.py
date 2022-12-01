@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
-from datetime import datetime
+import datetime
 from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
 from app.models import Notebook, db
@@ -23,11 +23,13 @@ def get_all_notebooks():
         .all()
     )
 
-    response = {"Notes": []}
+    response = {"Notebooks": []}
 
     for notebook in notebooks:
-        note_dict = notebook.to_dict()
-        response["Notes"].append(note_dict)
+        notebook_dict = notebook.to_dict()
+        notebook_dict["Notes"] = [note.to_dict() for note in notebook.notes]
+        notebook_dict["User"] = notebook.user.to_dict()
+        response["Notebooks"].append(notebook_dict)
 
     return response
 
@@ -45,6 +47,7 @@ def create_notebook():
 
     if form.validate_on_submit():
         new_notebook = Notebook(user_id=current_user.get_id(), name=form.data["name"])
+        new_notebook.set_created()
         db.session.add(new_notebook)
         db.session.commit()
         return new_notebook.to_dict(), 201
@@ -76,7 +79,7 @@ def update_notebook(id):
         if form.validate_on_submit():
             if form.data["name"]:
                 current_notebook.name = form.data["name"]
-            current_notebook.updated_at = datetime.utcnow()
+            current_notebook.set_updated()
             db.session.commit()
             return current_notebook.to_dict()
 

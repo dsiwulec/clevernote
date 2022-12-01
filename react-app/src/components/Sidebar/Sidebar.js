@@ -28,13 +28,24 @@ const Sidebar = () => {
                 <span>{user.firstName} {user.lastName}</span>
             </div>
             {showMenu && (
-                <div id='dropdown-menu-container'>
-                    <div id='dropdown-menu-user-info'></div>
+                <div id='dropdown-menu'>
+                    <div id='account-text-header'>ACCOUNT</div>
+                    <div id='dropdown-menu-user-info'>
+                        <i className="fa-solid fa-check" />
+                        <i className="fa-solid fa-circle-user" />
+                        <div id='dropdown-menu-user-email'>
+                            <span>{user.firstName} {user.lastName}</span>
+                            <span>{user.email}</span>
+                        </div>
+                    </div>
                     <LogoutButton />
                 </div>
             )}
-            <div id='sidebar-new-note-button'>
-                <button></button>
+            <div id='sidebar-new-note-button-container'>
+                <button id='sidebar-new-note-button'>
+                    <i className="fa-solid fa-plus" />
+                    <span>New Note</span>
+                </button>
             </div>
             <div id='nav-container'>
                 <NavLink className='sidebar-nav-link' to={`/`} exact={true}>

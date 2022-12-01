@@ -7,10 +7,10 @@ const HomePage = () => {
 
     return (
         <div className='main-container'>
-            <div className='sidebar-container'>
+            <div className='main-sidebar-container'>
                 <Sidebar />
             </div>
-            <div className='content-container'>
+            <div className='main-content-container'>
             </div>
         </div>
     )
