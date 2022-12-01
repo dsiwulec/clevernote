@@ -56,9 +56,9 @@ function SignupFormPage({ setShowSignup, setShowLogin }) {
                             setFirstNameCharCount(e.target.value.length)
                         }}
                         required
-                        maxLength={50}
+                        maxLength={20}
                     />
-                    <div className="char-count">{firstNameCharCount}/50</div>
+                    <div className="char-count">{firstNameCharCount}/20</div>
                 </div>
                 <div className='auth-input'>
                     <input
@@ -70,9 +70,9 @@ function SignupFormPage({ setShowSignup, setShowLogin }) {
                             setLastNameCharCount(e.target.value.length)
                         }}
                         required
-                        maxLength={50}
+                        maxLength={20}
                     />
-                    <div className="char-count">{lastNameCharCount}/50</div>
+                    <div className="char-count">{lastNameCharCount}/20</div>
                 </div>
                 <div className='auth-input'>
                     <input
@@ -84,9 +84,9 @@ function SignupFormPage({ setShowSignup, setShowLogin }) {
                             setEmailCharCount(e.target.value.length)
                         }}
                         required
-                        maxLength={50}
+                        maxLength={40}
                     />
-                    <div className="char-count">{emailCharCount}/50</div>
+                    <div className="char-count">{emailCharCount}/40</div>
                 </div>
                 <div className='auth-input'>
                     <input
@@ -99,9 +99,9 @@ function SignupFormPage({ setShowSignup, setShowLogin }) {
                         }}
                         required
                         minLength={6}
-                        maxLength={50}
+                        maxLength={40}
                     />
-                    <div className="char-count">{passwordCharCount}/50</div>
+                    <div className="char-count">{passwordCharCount}/40</div>
                 </div>
                 <div className='auth-input'>
                     <input
@@ -114,9 +114,9 @@ function SignupFormPage({ setShowSignup, setShowLogin }) {
                         }}
                         required
                         minLength={6}
-                        maxLength={50}
+                        maxLength={40}
                     />
-                    <div className="char-count">{confirmPasswordCharCount}/50</div>
+                    <div className="char-count">{confirmPasswordCharCount}/40</div>
                 </div>
             </div>
             <div className='auth-footer'>

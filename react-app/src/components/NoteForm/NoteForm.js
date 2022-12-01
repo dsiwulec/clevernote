@@ -53,9 +53,9 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
                     placeholder='Title'
                     value={title}
                     onChange={updateTitle}
-                    maxLength={100}
+                    maxLength={35}
                 />
-                <div className='char-count'>{titleCharCount}/100</div>
+                <div className='char-count'>{titleCharCount}/35</div>
             </div>
             <div id='note-text-input-container'>
                 <textarea

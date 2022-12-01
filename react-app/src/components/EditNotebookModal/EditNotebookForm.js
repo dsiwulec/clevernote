@@ -55,9 +55,9 @@ const EditNotebookForm = ({ notebook, showEditModal, setShowEditModal }) => {
                         value={name}
                         onChange={updateName}
                         required
-                        maxLength={100}
+                        maxLength={50}
                     />
-                    <div className='char-count'>{nameCharCount}/100</div>
+                    <div className='char-count'>{nameCharCount}/50</div>
                 </div>
             </div>
             <div id='new-notebook-footer'>
