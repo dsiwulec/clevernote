@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { createNewNote } from '../../store/note'
 import LogoutButton from '../auth/LogoutButton';
 import './Sidebar.css'
@@ -8,6 +8,7 @@ import './Sidebar.css'
 
 const Sidebar = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const [showMenu, setShowMenu] = useState(false)
     const user = useSelector(state => state.session.user)
 
@@ -25,6 +26,7 @@ const Sidebar = () => {
 
     const newNote = async () => {
         await dispatch(createNewNote())
+        history.push('/notes/')
     }
 
 
