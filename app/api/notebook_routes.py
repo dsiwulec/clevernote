@@ -10,7 +10,7 @@ notebook_routes = Blueprint("notebooks", __name__)
 
 
 @notebook_routes.route("/")
-# @login_required
+@login_required
 def get_all_notebooks():
     """
     Queries for all notebooks, and all associated data,

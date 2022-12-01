@@ -49,8 +49,6 @@
     margin: 0px 40px;
     flex: 1;
     justify-content: space-between;
-    /* overflow: auto;
-    height: calc(100vh - 145px); */
 }
 
 .column-header {

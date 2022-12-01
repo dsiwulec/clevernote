@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { createNewNotebook } from '../../store/notebook';
-import './NewNotebookForm.css'
+import { updateNotebook, getAllNotebooks } from '../../store/notebook';
+import './EditNotebookForm.css'
 
-const NewNotebookForm = ({ showNewNotebookModal, setShowNewNotebookModal }) => {
+const EditNotebookForm = ({ notebook, showEditModal, setShowEditModal }) => {
     const [errors, setErrors] = useState([]);
-    const [name, setName] = useState('');
-    const [nameCharCount, setNameCharCount] = useState(0)
+    const [name, setName] = useState(notebook.name);
+    const [nameCharCount, setNameCharCount] = useState(notebook.name.length)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (showNewNotebookModal) {
+        if (showEditModal) {
             document.body.style.overflow = 'hidden';
         }
         return () => {
             document.body.style.overflow = 'unset';
-            setShowNewNotebookModal(false)
+            setShowEditModal(false)
         }
-    }, [showNewNotebookModal, setShowNewNotebookModal])
+    }, [showEditModal, setShowEditModal])
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const newNotebook = await dispatch(createNewNotebook(name))
+        const editedNotebook = await dispatch(updateNotebook({ id: notebook.id, name }))
             .catch(async (response) => {
                 const data = await response.json();
 
                 if (data && data.errors) setErrors(Object.values(data.errors));
             });
 
-        if (newNotebook) {
-            setShowNewNotebookModal(false)
+        if (editedNotebook) {
+            setShowEditModal(false)
+            dispatch(getAllNotebooks())
         }
 
     };
@@ -41,9 +42,8 @@ const NewNotebookForm = ({ showNewNotebookModal, setShowNewNotebookModal }) => {
     };
 
     return (
-        <form id='new-notebook-form' onSubmit={onSubmit}>
-            <div id='new-notebook-header'>Create new notebook</div>
-            <div id='new-notebook-text'>Notebooks are useful for grouping notes around a common topic. They can be private or shared.</div>
+        <form id='edit-notebook-form' onSubmit={onSubmit}>
+            <div id='edit-notebook-header'>Rename notebook</div>
             <div id='input-container'>
                 <label htmlFor="name" id='new-notebook-name-label'>Name</label>
                 <div className='new-notebook-input-container'>
@@ -61,8 +61,8 @@ const NewNotebookForm = ({ showNewNotebookModal, setShowNewNotebookModal }) => {
                 </div>
             </div>
             <div id='new-notebook-footer'>
-                <button className='cancel-button' type='button' onClick={() => setShowNewNotebookModal(false)}>Cancel</button>
-                <button className='create-button' type="submit">Create</button>
+                <button className='cancel-button' type='button' onClick={() => setShowEditModal(false)}>Cancel</button>
+                <button className='create-button' type="submit">Continue</button>
             </div>
             {errors.length > 0 && (
                 <div id='login-errors'>
@@ -74,4 +74,4 @@ const NewNotebookForm = ({ showNewNotebookModal, setShowNewNotebookModal }) => {
     );
 };
 
-export default NewNotebookForm;
+export default EditNotebookForm;

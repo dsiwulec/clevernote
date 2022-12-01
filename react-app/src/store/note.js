@@ -41,10 +41,11 @@ export const createNewNote = note => async dispatch => {
     }
 }
 
-export const getAllNotes = notes => async dispatch => {
-    const response = await fetch('/api/notes')
+export const getAllNotes = () => async dispatch => {
+    const response = await fetch('/api/notes/')
 
     if (response.ok) {
+        const notes = await response.json()
         dispatch(loadNotes(notes))
     }
 }
@@ -79,7 +80,7 @@ const noteReducer = (state = {}, action) => {
 
         case LOAD_NOTES: {
             action.notes.Notes.forEach(note => state[note.id] = note)
-            return { ...state.notes }
+            return { ...state }
         }
 
         case UPDATE_NOTE: {

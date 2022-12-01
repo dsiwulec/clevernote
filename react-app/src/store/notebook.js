@@ -42,7 +42,7 @@ export const createNewNotebook = name => async dispatch => {
 }
 
 export const getAllNotebooks = () => async dispatch => {
-    const response = await fetch('/api/notebooks')
+    const response = await fetch('/api/notebooks/')
 
     if (response.ok) {
         const notebooks = await response.json()
@@ -55,11 +55,19 @@ export const getAllNotebooks = () => async dispatch => {
 }
 
 export const updateNotebook = notebook => async dispatch => {
-    const response = await fetch(`/api/notebooks/${notebook.id}`, { method: 'PUT' })
+    const response = await fetch(`/api/notebooks/${notebook.id}`, {
+        method: 'PUT',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: notebook.name })
+    })
 
     if (response.ok) {
-        const notebook = await response.json()
-        dispatch(editNotebook(notebook))
+        const editedNotebook = await response.json()
+        dispatch(editNotebook(editedNotebook))
+        return editedNotebook
+    } else {
+        const errors = await response.json()
+        return errors;
     }
 }
 

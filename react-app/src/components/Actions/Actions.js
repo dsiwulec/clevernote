@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DeleteNotebookModal from '../DeleteNotebookModal/DeleteNotebookModal';
+import EditNotebookModal from '../EditNotebookModal/EditNotebookModal';
 import './Actions.css'
 
 const Actions = ({ notebook }) => {
@@ -36,7 +37,7 @@ const Actions = ({ notebook }) => {
                     </div>
                 </div>
             )}
-            {/* {showEditModal && <EditNotebookModal notebook={notebook} />} */}
+            {showEditModal && <EditNotebookModal notebook={notebook} showEditModal={showEditModal} setShowEditModal={setShowEditModal} />}
             {showDeleteModal && <DeleteNotebookModal notebookId={notebook.id} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} />}
         </div>
     )

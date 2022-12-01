@@ -40,3 +40,10 @@ class Note(db.Model):
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }
+
+
+# from sqlalchemy import func
+
+
+# created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
+# updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
