@@ -14,6 +14,7 @@ const NotesPage = () => {
     const notesObject = useSelector(state => state.notes)
     const notesNumber = useSelector(state => Object.keys(state.notes).length)
     const notes = Object.values(notesObject)
+
     notes.sort(
         (a, b) => (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : (new Date(a.createdAt) > new Date(b.createdAt)) ? -1 : 0);
 
@@ -32,6 +33,7 @@ const NotesPage = () => {
                 setTitle(notes[0].title)
                 setText(notes[0].text)
                 setNoteId(notes[0].id)
+                setNotebookId(notes[0].notebookId)
             }
         })()
     }, [dispatch, notesNumber])
@@ -54,6 +56,7 @@ const NotesPage = () => {
                                 key={note.id}
                                 note={note}
                                 setNoteId={setNoteId}
+                                setNotebookId={setNotebookId}
                                 setTitle={setTitle}
                                 setText={setText}
                                 setTitleCharCount={setTitleCharCount} />))}

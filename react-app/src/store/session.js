@@ -1,3 +1,5 @@
+import { createNewNotebook } from "./notebook";
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -24,7 +26,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +42,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -82,16 +84,33 @@ export const signUp = (username, email, password) => async (dispatch) => {
       password,
     }),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
-    return null;
+
+    const notebookResponse = await fetch('/api/notebooks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: "First Notebook",
+        default: true
+      })
+    })
+
+    if (notebookResponse.ok) {
+      const defaultNotebook = await notebookResponse.json()
+      dispatch(createNewNotebook(defaultNotebook))
+    }
+
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
       return data.errors;
     }
+
   } else {
     return ['An error occurred. Please try again.']
   }

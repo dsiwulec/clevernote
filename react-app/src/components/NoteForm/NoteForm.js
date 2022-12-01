@@ -12,7 +12,7 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(updateNote({ id, title, text }));
+        const data = await dispatch(updateNote({ id, notebookId, title, text }));
         if (data) {
             let errors = []
             let errorsProperties = Object.values(data)
@@ -39,7 +39,7 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
         setText(e.target.value);
     };
 
-    const updateNotbookId = (e) => {
+    const updateNotebookId = (e) => {
         setNotebookId(e.target.value)
     }
 
@@ -67,19 +67,21 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
                     onChange={updateText}
                 />
             </div>
-            <div id='notebook-select-container'>
+            {notebooks.length > 0 && <div id='notebook-select-container'>
                 <i className="fa-solid fa-book select-icon" />
                 <select
                     id="notebook-select"
                     name='notebook'
                     value={notebookId}
-                    onChange={updateNotbookId}
+                    onFocus={updateNotebookId}
+                    onChange={updateNotebookId}
                 >
                     {notebooks.map(notebook => (
-                        <option value={notebook.id}>{notebook.name}</option>
+                        <option key={notebook.id} value={notebook.id}>{notebook.name}</option>
                     ))}
                 </select>
             </div>
+            }
             <div id='note-form-footer'>
                 <button id='note-form-button' type="submit">Save</button>
             </div>

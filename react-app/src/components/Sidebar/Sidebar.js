@@ -24,7 +24,14 @@ const Sidebar = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
+
     const newNote = async () => {
+        const previouslySelected = document.getElementsByClassName("selected-note")
+
+        if (previouslySelected.length > 0) {
+            previouslySelected[0].classList.remove('selected-note')
+        }
+
         await dispatch(createNewNote())
         history.push('/notes/')
     }

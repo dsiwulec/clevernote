@@ -35,7 +35,7 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           {user ?
-            <HomePage /> :
+            <NotebooksPage /> :
             <SplashPage />}
         </Route>
       </Switch>

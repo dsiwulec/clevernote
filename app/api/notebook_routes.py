@@ -45,7 +45,11 @@ def create_notebook():
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
-        new_notebook = Notebook(user_id=current_user.get_id(), name=form.data["name"])
+        new_notebook = Notebook(
+            user_id=current_user.get_id(),
+            name=form.data["name"],
+            default=form.data["default"],
+        )
         new_notebook.set_created()
         db.session.add(new_notebook)
         db.session.commit()

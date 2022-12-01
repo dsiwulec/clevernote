@@ -59,12 +59,12 @@ export const updateNote = note => async dispatch => {
     const response = await fetch(`/api/notes/${note.id}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: note.title, text: note.text })
+        body: JSON.stringify({ notebookId: note.notebookId, title: note.title, text: note.text })
     })
 
     if (response.ok) {
-        const edtiedNote = await response.json()
-        dispatch(editNote(edtiedNote))
+        const editedNote = await response.json()
+        dispatch(editNote(editedNote))
     }
 }
 

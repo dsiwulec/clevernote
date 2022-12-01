@@ -27,11 +27,11 @@ const removeNotebook = notebookId => ({
 
 
 // Thunks
-export const createNewNotebook = name => async dispatch => {
+export const createNewNotebook = (notebook) => async dispatch => {
     const response = await fetch('/api/notebooks/', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name })
+        body: JSON.stringify({ name: notebook.name, default: notebook.default })
     })
 
     if (response.ok) {

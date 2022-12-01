@@ -79,6 +79,8 @@ def update_note(id):
             return {"message": "Forbidden"}, 403
 
         if form.validate_on_submit():
+            if form.data["notebookId"]:
+                current_note.notebook_id = form.data["notebookId"]
             if form.data["title"]:
                 current_note.title = form.data["title"]
             if form.data["text"]:

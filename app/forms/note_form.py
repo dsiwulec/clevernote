@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField
+from wtforms import StringField, TextAreaField, IntegerField
 from wtforms.validators import Length, Optional
 
 
 class NoteForm(FlaskForm):
-    title = StringField("Title", validators=[Length(max=75), Optional()])
-    text = TextAreaField("Text", validators=[Length(max=1000), Optional()])
+    notebookId = IntegerField("Notebook ID")
+    title = StringField("Title", validators=[Length(max=35), Optional()])
+    text = TextAreaField("Text")
