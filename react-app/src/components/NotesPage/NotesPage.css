@@ -1,5 +1,6 @@
 #notes-main-container {
     display: flex;
+    overflow: hidden;
 }
 
 #notes-list-container {
@@ -35,7 +36,7 @@
     color: #666666;
     border-bottom: 1px solid #cccccc;
     height: 25px;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 #note-details-header {
@@ -49,10 +50,11 @@
 #note-cards-list {
     height: calc(100vh - 86px);
     overflow: auto;
+    padding-bottom: 7px;
 }
 
 #note-details-text-container {
-    height: calc(100vh - 42px);
+    height: calc(100vh - 40px);
     width: 100%;
     overflow: auto;
     padding: 0px 20px;

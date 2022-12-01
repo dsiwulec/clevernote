@@ -67,9 +67,9 @@ const LoginForm = ({ showLogin, setShowLogin, setShowSignup }) => {
                         value={email}
                         onChange={updateEmail}
                         required
-                        maxLength={100}
+                        maxLength={40}
                     />
-                    <div className='char-count'>{emailCharCount}/100</div>
+                    <div className='char-count'>{emailCharCount}/40</div>
                 </div>
                 <div className='auth-input'>
                     <input
