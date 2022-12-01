@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { deleteNotebook } from '../../store/notebook'
-import './DeleteNotebookForm.css'
+import { deleteNote } from '../../store/note'
+import './DeleteNoteForm.css'
 
-const DeleteNotebookForm = ({ notebookId, showDeleteModal, setShowDeleteModal }) => {
+const DeleteNoteForm = ({ noteId, showDeleteModal, setShowDeleteModal, setTitle, setText }) => {
 
     const dispatch = useDispatch()
 
@@ -19,20 +19,22 @@ const DeleteNotebookForm = ({ notebookId, showDeleteModal, setShowDeleteModal })
 
     return (
         <div id="delete-notebook-form">
-            <div id="confirm-delete-header">Delete notebook?</div>
+            <div id="confirm-delete-header">Delete note?</div>
             <div id="confirm-delete-text">
-                Any notes in the notebook will be moved to Trash. This cannot be undone.
+                This action is permanent and cannot be undone.
             </div>
             <div className="delete-notebook-footer">
                 <button onClick={() => setShowDeleteModal(false)} className='delete-cancel-button'>Cancel</button>
                 <button onClick={async () => {
-                    await dispatch(deleteNotebook(notebookId))
+                    await dispatch(deleteNote(noteId))
+                    setTitle('')
+                    setText('')
                     setShowDeleteModal(false)
                 }}
                     className="submit-delete-button">Delete</button>
             </div>
-        </div>
+        </div >
     )
 }
 
-export default DeleteNotebookForm;
+export default DeleteNoteForm;

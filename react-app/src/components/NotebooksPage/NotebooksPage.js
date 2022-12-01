@@ -17,6 +17,9 @@ const NotebooksPage = () => {
     const notebooksNumber = useSelector(state => Object.keys(state.notebooks).length)
     const notebooks = Object.values(notebooksObject)
 
+    notebooks.sort(
+        (a, b) => (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : (new Date(a.createdAt) > new Date(b.createdAt)) ? -1 : 0);
+
     useEffect(() => {
         (async function () {
             await dispatch(notebookActions.getAllNotebooks());

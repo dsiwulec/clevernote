@@ -2,7 +2,7 @@ import React from "react";
 import timeSince from "../../utilities/timeSince";
 import './NoteCard.css'
 
-const NoteCard = ({ note, setNoteId, setTitle, setText }) => {
+const NoteCard = ({ note, setNoteId, setTitle, setTitleCharCount, setText }) => {
 
     const onClick = (e) => {
         const previouslySelected = document.getElementsByClassName("selected-note")
@@ -14,6 +14,7 @@ const NoteCard = ({ note, setNoteId, setTitle, setText }) => {
         e.target.closest(".note-card-container").classList.add("selected-note")
         setNoteId(note.id)
         setTitle(note.title)
+        if (note.title) setTitleCharCount(note.title.length)
         setText(note.text)
     }
 

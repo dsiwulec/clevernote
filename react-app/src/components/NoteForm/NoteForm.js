@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateNote } from '../../store/note';
+import { getAllNotebooks } from '../../store/notebook';
+import './NoteForm.css'
 
-const NoteForm = ({ id, title, setTitle, text, setText }) => {
+const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitleCharCount, notebookId, setNotebookId }) => {
     const [errors, setErrors] = useState([]);
-    const [titleCharCount, setTitleCharCount] = useState(title.length)
     const dispatch = useDispatch();
 
+    const notebooks = useSelector(state => Object.values(state.notebooks))
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -22,6 +24,12 @@ const NoteForm = ({ id, title, setTitle, text, setText }) => {
         }
     };
 
+    useEffect(() => {
+        (async function () {
+            await dispatch(getAllNotebooks());
+        })()
+    }, [dispatch])
+
     const updateTitle = (e) => {
         setTitle(e.target.value);
         setTitleCharCount(e.target.value.length)
@@ -31,29 +39,46 @@ const NoteForm = ({ id, title, setTitle, text, setText }) => {
         setText(e.target.value);
     };
 
+    const updateNotbookId = (e) => {
+        setNotebookId(e.target.value)
+    }
+
     return (
         <form id='note-form' onSubmit={onSubmit}>
-            <div id='note-title-input'>
+            <div id='note-title-input-container'>
                 <input
+                    id='note-title-input'
                     name='title'
                     type='text'
                     placeholder='Title'
                     value={title}
                     onChange={updateTitle}
-                    required
                     maxLength={100}
                 />
                 <div className='char-count'>{titleCharCount}/100</div>
             </div>
-            <div id='note-text-input'>
-                <input
+            <div id='note-text-input-container'>
+                <textarea
+                    id='note-text-input'
                     name='text'
                     type='text'
-                    placeholder='Start writing so you never forget the important things'
+                    placeholder='Start writing so you never forget the important things...'
                     value={text}
                     onChange={updateText}
-                    required
                 />
+            </div>
+            <div id='notebook-select-container'>
+                <i className="fa-solid fa-book select-icon" />
+                <select
+                    id="notebook-select"
+                    name='notebook'
+                    value={notebookId}
+                    onChange={updateNotbookId}
+                >
+                    {notebooks.map(notebook => (
+                        <option value={notebook.id}>{notebook.name}</option>
+                    ))}
+                </select>
             </div>
             <div id='note-form-footer'>
                 <button id='note-form-button' type="submit">Save</button>

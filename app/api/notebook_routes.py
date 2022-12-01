@@ -1,6 +1,5 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
-import datetime
 from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
 from app.models import Notebook, db
@@ -18,9 +17,9 @@ def get_all_notebooks():
     """
 
     notebooks = (
-        Notebook.query.order_by(Notebook.id)
-        .options(joinedload(Notebook.user), joinedload(Notebook.notes))
-        .all()
+        Notebook.query.filter_by(user_id=current_user.get_id())
+        # .order_by(Notebook.created_at.desc())
+        .options(joinedload(Notebook.user), joinedload(Notebook.notes)).all()
     )
 
     response = {"Notebooks": []}
