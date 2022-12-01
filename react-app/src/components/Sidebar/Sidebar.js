@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { createNewNote } from '../../store/note'
 import LogoutButton from '../auth/LogoutButton';
 import './Sidebar.css'
 
 
 const Sidebar = () => {
+    const dispatch = useDispatch()
     const [showMenu, setShowMenu] = useState(false)
     const user = useSelector(state => state.session.user)
 
@@ -20,6 +22,11 @@ const Sidebar = () => {
 
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
+
+    const newNote = async () => {
+        await dispatch(createNewNote())
+    }
+
 
     return (
         <div id='sidebar-container'>
@@ -42,18 +49,18 @@ const Sidebar = () => {
                 </div>
             )}
             <div id='sidebar-new-note-button-container'>
-                <button id='sidebar-new-note-button'>
+                <button id='sidebar-new-note-button' onClick={newNote}>
                     <i className="fa-solid fa-plus" />
                     <span>New Note</span>
                 </button>
             </div>
             <div id='nav-container'>
-                <NavLink className='sidebar-nav-link' to={`/`} exact={true}>
+                {/* <NavLink className='sidebar-nav-link' to={`/`} exact={true}>
                     <div className='sidebar-nav-link-icon'>
                         <i className="fa-solid fa-house sidebar-icons" />
                     </div>
                     <span>Home</span>
-                </NavLink>
+                </NavLink> */}
                 <NavLink className='sidebar-nav-link' to={`/notes`} exact={true}>
                     <div className='sidebar-nav-link-icon'>
                         <i className="fa-solid fa-note-sticky sidebar-icons" />

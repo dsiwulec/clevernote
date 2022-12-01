@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 683237683882
+Revision ID: 0fa8b3b508ab
 Revises: 
-Create Date: 2022-11-30 00:28:48.064078
+Create Date: 2022-11-30 23:09:29.724046
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '683237683882'
+revision = '0fa8b3b508ab'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,7 +30,7 @@ def upgrade():
     op.create_table('notebooks',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=50), nullable=True),
+    sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
@@ -40,7 +40,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('notebook_id', sa.Integer(), nullable=True),
-    sa.Column('title', sa.String(length=75), nullable=False),
+    sa.Column('title', sa.String(length=75), nullable=True),
     sa.Column('text', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),

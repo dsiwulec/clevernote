@@ -1,7 +1,8 @@
 .note-card-container {
-    height: 120px;
-    padding: 14px 24px;
+    height: 148px;
+    padding: 20px 24px;
     cursor: pointer;
+    margin-left: 2px;
 }
 
 .note-card-note-title {
@@ -17,6 +18,8 @@
     -webkit-box-orient: vertical;
     font-size: 14px;
     color: #737373;
+    height: 43px;
+    margin: 10px 0px;
 }
 
 .note-card-updated-at {

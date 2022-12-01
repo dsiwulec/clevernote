@@ -33,11 +33,16 @@ const removeNotebookNotes = notes => ({
 
 
 // Thunks
-export const createNewNote = note => async dispatch => {
-    const response = await fetch('/api/notes', { method: 'POST' })
+export const createNewNote = () => async dispatch => {
+    const response = await fetch('/api/notes/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: '', text: '' })
+    })
 
     if (response.ok) {
-        dispatch(addNote(note))
+        const newNote = await response.json()
+        dispatch(addNote(newNote))
     }
 }
 
@@ -51,10 +56,15 @@ export const getAllNotes = () => async dispatch => {
 }
 
 export const updateNote = note => async dispatch => {
-    const response = await fetch(`/api/notes/${note.id}`, { method: 'PUT' })
+    const response = await fetch(`/api/notes/${note.id}`, {
+        method: 'PUT',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: note.title, text: note.text })
+    })
 
     if (response.ok) {
-        dispatch(editNote({ title: note.title, text: note.text }))
+        const edtiedNote = await response.json()
+        dispatch(editNote(edtiedNote))
     }
 }
 
@@ -89,7 +99,7 @@ const noteReducer = (state = {}, action) => {
         }
 
         case DELETE_NOTE: {
-            delete state[action.note.id]
+            delete state[action.noteId]
             return { ...state }
         }
 

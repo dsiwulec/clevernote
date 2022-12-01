@@ -1,0 +1,75 @@
+#note-title-input {
+    font-size: 30px;
+    line-height: 40px;
+    border: none;
+    color: #333333;
+}
+
+#note-title-input {
+    font-size: 30px;
+    line-height: 40px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #cccc;
+    color: #333333;
+}
+
+#note-title-input:focus {
+    outline: none;
+}
+
+#note-text-input {
+    font-size: 16px;
+    color: #333333;
+    height: calc(100vh - 185px);
+    width: 100%;
+    margin: 0px 10px;
+    border: none;
+    resize: none;
+}
+
+#note-text-input:focus {
+    outline: none;
+}
+
+#note-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 80px;
+    border-top: 1px solid #cccc;
+}
+
+#note-form-button {
+    height: 40px;
+    width: 80px;
+    background-color: #00A82D;
+    color: white;
+    border-radius: 5px;
+}
+
+#notebook-select-container {
+    position: fixed;
+    top: 9px;
+    right: 125px;
+}
+
+#notebook-select {
+    border: none;
+    color: #737373;
+    border-radius: 3px;
+    font-size: 14px;
+    height: 28px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+#notebook-select:focus {
+    outline: none;
+}
+
+.select-icon {
+    color: #737373;
+    font-size: 14px;
+    padding-right: 2px;
+}
