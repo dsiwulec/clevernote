@@ -68,7 +68,7 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
                 />
             </div>
             {notebooks.length > 0 && <div id='notebook-select-container'>
-                <i className="fa-solid fa-book select-icon" />
+                <div id='assigned-to'>Assigned to:</div>
                 <select
                     id="notebook-select"
                     name='notebook'

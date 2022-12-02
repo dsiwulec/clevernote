@@ -89,6 +89,7 @@ const notebookReducer = (state = {}, action) => {
         }
 
         case LOAD_NOTEBOOKS: {
+            state = {}
             action.notebooks.Notebooks.forEach(notebook => state[notebook.id] = notebook)
             return { ...state }
         }
