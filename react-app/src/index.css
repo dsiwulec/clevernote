@@ -40,3 +40,12 @@ button:hover {
     max-height: 90%;
     overflow-y: auto;
 }
+
+#login-errors {
+    color: red;
+}
+
+#signup-errors {
+    color: red;
+    margin: 0px 50px;
+}

@@ -54,6 +54,7 @@ export const getAllNotebooks = () => async dispatch => {
     }
 }
 
+
 export const updateNotebook = notebook => async dispatch => {
     const response = await fetch(`/api/notebooks/${notebook.id}`, {
         method: 'PUT',

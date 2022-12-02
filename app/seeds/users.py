@@ -1,4 +1,5 @@
 from app.models import db, User, Notebook, environment, SCHEMA
+import datetime
 
 
 # Adds a demo user, you can add other users here if you want
@@ -13,7 +14,12 @@ def seed_users():
     db.session.add(demo)
     db.session.commit()
 
-    defaultNotebook = Notebook(user_id=1, name="First Notebook", default=True)
+    defaultNotebook = Notebook(
+        user_id=1,
+        name="First Notebook",
+        default=True,
+        created_at=datetime.datetime.now(datetime.timezone.utc),
+    )
 
     db.session.add(defaultNotebook)
     db.session.commit()

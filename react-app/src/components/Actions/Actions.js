@@ -31,9 +31,14 @@ const Actions = ({ notebook }) => {
                         <button className="rename-notebook-button actions-button" onClick={() => setShowEditModal(true)}>
                             Rename notebook
                         </button>
-                        <button className='delete-notebook-button actions-button' onClick={() => setShowDeleteModal(true)}>
+                        {notebook.default === false && <button className='delete-notebook-button actions-button' onClick={() => setShowDeleteModal(true)}>
                             Delete notebook
                         </button>
+                        }
+                        {notebook.default === true && <button id='default-notebook-delete-button' className='delete-notebook-button actions-button' onClick={() => setShowDeleteModal(true)} title='You cannot delete your default notebook' disabled={true}>
+                            Delete notebook
+                        </button>
+                        }
                     </div>
                 </div>
             )}

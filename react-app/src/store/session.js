@@ -72,39 +72,25 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (username, email, password) => async (dispatch) => {
+export const signUp = (firstName, lastName, email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      username,
+      firstName,
+      lastName,
       email,
-      password,
+      password
     }),
   });
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data))
-
-    const notebookResponse = await fetch('/api/notebooks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: "First Notebook",
-        default: true
-      })
-    })
-
-    if (notebookResponse.ok) {
-      const defaultNotebook = await notebookResponse.json()
-      dispatch(createNewNotebook(defaultNotebook))
-    }
-
+    await dispatch(setUser(data))
+    await dispatch(createNewNotebook({ name: "First Notebook", default: true }))
+    return null
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {

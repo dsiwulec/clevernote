@@ -34,6 +34,7 @@ class Notebook(db.Model):
             "id": self.id,
             "userId": self.user_id,
             "name": self.name,
+            "default": self.default,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }

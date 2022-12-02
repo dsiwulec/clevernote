@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import current_user, login_required
 from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
-from app.models import Notebook, db
+from app.models import Notebook, Note, db
 from app.forms import NotebookForm
 
 notebook_routes = Blueprint("notebooks", __name__)
@@ -31,6 +31,46 @@ def get_all_notebooks():
         response["Notebooks"].append(notebook_dict)
 
     return response
+
+
+@notebook_routes.route("/<int:id>/notes")
+@login_required
+def get_notebook_notes(id):
+    """
+    Queries for all notebooks, and all associated data,
+    and returns it in a list of dictionaries
+    """
+
+    notes = (
+        Note.query.filter_by(notebook_id=id)
+        .options(joinedload(Note.user), joinedload(Note.notebook))
+        .all()
+    )
+
+    response = {"Notes": []}
+
+    for note in notes:
+        note_dict = note.to_dict()
+        response["Notes"].append(note_dict)
+
+    return response
+
+
+@notebook_routes.route("/default")
+@login_required
+def get_default_notebook():
+    """
+    Queries for the current users default notebook,
+    and returns it as a dictionary
+    """
+
+    defaultNotebook = (
+        Notebook.query.filter_by(user_id=current_user.get_id(), default=True)
+        .options(joinedload(Notebook.user), joinedload(Notebook.notes))
+        .one()
+    )
+
+    return defaultNotebook.to_dict()
 
 
 @notebook_routes.route("/", methods=["POST"])
@@ -73,7 +113,7 @@ def update_notebook(id):
         current_notebook = Notebook.query.get_or_404(id)
 
     except:
-        return {"message": "Note couldn't be found"}, 404
+        return {"message": "Notebook couldn't be found"}, 404
 
     else:
         if current_notebook.user_id != int(current_user.get_id()):
@@ -100,7 +140,7 @@ def delete_notebook(id):
     try:
         notebook_to_delete = Notebook.query.get_or_404(id)
     except:
-        return {"message": "Post couldn't be found"}, 404
+        return {"message": "Notebook couldn't be found"}, 404
     else:
         if notebook_to_delete.user_id != int(current_user.get_id()):
             return {"message": "Forbidden"}, 403

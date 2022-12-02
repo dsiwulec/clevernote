@@ -31,7 +31,7 @@ const LoginForm = ({ showLogin, setShowLogin, setShowSignup }) => {
             let errorsProperties = Object.values(data)
             let errorsKeys = Object.keys(data)
             for (let i = 0; i < errorsKeys.length; i++) {
-                errors.push(errorsKeys[i] + ': ' + errorsProperties[i])
+                errors.push(errorsProperties[i])
             }
             setErrors(errors);
         }

@@ -83,6 +83,11 @@ const Sidebar = () => {
                     <span>Notebooks</span>
                 </NavLink>
             </div>
+            <div id='about-links'>
+                <div>David Siwulec</div>
+                <a href="https://github.com/dsiwulec"><i className="fa-brands fa-github" /></a>
+                <a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in" /></a>
+            </div>
         </div>
     )
 }

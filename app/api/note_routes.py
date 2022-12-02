@@ -18,7 +18,7 @@ def get_all_notes():
     """
 
     notes = (
-        Note.query.order_by(Note.id)
+        Note.query.filter_by(user_id=current_user.get_id())
         .options(joinedload(Note.user), joinedload(Note.notebook))
         .all()
     )
@@ -48,6 +48,7 @@ def create_note():
             user_id=current_user.get_id(),
             title=form.data["title"],
             text=form.data["text"],
+            notebook_id=form.data["notebookId"],
         )
         new_note.set_created()
         db.session.add(new_note)

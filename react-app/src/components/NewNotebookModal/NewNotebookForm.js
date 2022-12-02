@@ -22,7 +22,7 @@ const NewNotebookForm = ({ showNewNotebookModal, setShowNewNotebookModal }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const newNotebook = await dispatch(createNewNotebook(name))
+        const newNotebook = await dispatch(createNewNotebook({ name, defaultNotebook: false }))
             .catch(async (response) => {
                 const data = await response.json();
 
