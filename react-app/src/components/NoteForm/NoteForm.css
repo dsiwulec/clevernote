@@ -56,6 +56,8 @@
     position: fixed;
     top: 9px;
     right: 125px;
+    display: flex;
+    align-items: center;
 }
 
 #notebook-select {
@@ -76,4 +78,10 @@
     color: #737373;
     font-size: 14px;
     padding-right: 2px;
+}
+
+#assigned-to {
+    color: #737373;
+    font-size: 14px;
+    padding-right: 5px;
 }
