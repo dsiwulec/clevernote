@@ -112,3 +112,15 @@
     padding-right: 10px;
     font-size: 14px;
 }
+
+#about-links {
+    display: flex;
+    width: 240px;
+    justify-content: space-evenly;
+    position: fixed;
+    bottom: 10px;
+}
+
+#about-links * {
+    color: #fcb100;
+}

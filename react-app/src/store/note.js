@@ -1,5 +1,6 @@
 const CREATE_NOTE = 'note/CREATE_NOTE'
 const LOAD_NOTES = 'note/LOAD_NOTES'
+const LOAD_NOTEBOOK_NOTES = 'note/LOAD_NOTEBOOK_NOTES'
 const UPDATE_NOTE = 'note/UPDATE_NOTE'
 const DELETE_NOTE = 'note/DELETE_NOTE'
 const DELETE_NOTEBOOK_NOTES = 'note/DELETE_NOTEBOOK_NOTES'
@@ -34,10 +35,16 @@ const removeNotebookNotes = notes => ({
 
 // Thunks
 export const createNewNote = () => async dispatch => {
+    const notebookResponse = await fetch('/api/notebooks/default')
+    const defaultNotebook = await notebookResponse.json()
+
+    console.log('NOTEBOOK', defaultNotebook)
+    console.log('NOTEBOOK ID', defaultNotebook.id)
+
     const response = await fetch('/api/notes/', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: '', text: '' })
+        body: JSON.stringify({ title: '', text: '', notebookId: defaultNotebook.id })
     })
 
     if (response.ok) {
@@ -55,16 +62,29 @@ export const getAllNotes = () => async dispatch => {
     }
 }
 
+export const getNotebookNotes = (id) => async dispatch => {
+    const response = await fetch(`/api/notebooks/${id}/notes`)
+
+    if (response.ok) {
+        const notes = await response.json()
+        dispatch(loadNotes(notes))
+        return notes
+    } else {
+        const errors = await response.json()
+        return errors;
+    }
+}
+
 export const updateNote = note => async dispatch => {
     const response = await fetch(`/api/notes/${note.id}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: note.title, text: note.text })
+        body: JSON.stringify({ notebookId: note.notebookId, title: note.title, text: note.text })
     })
 
     if (response.ok) {
-        const edtiedNote = await response.json()
-        dispatch(editNote(edtiedNote))
+        const editedNote = await response.json()
+        dispatch(editNote(editedNote))
     }
 }
 
@@ -89,6 +109,7 @@ const noteReducer = (state = {}, action) => {
         }
 
         case LOAD_NOTES: {
+            state = {}
             action.notes.Notes.forEach(note => state[note.id] = note)
             return { ...state }
         }

@@ -26,20 +26,20 @@ function SignupFormPage({ setShowSignup, setShowLogin }) {
         setErrors([]);
         if (password !== confirmPassword) return setErrors(['Confirm Password field must be the same as the Password field'])
 
-        const newUser = await dispatch(signUp({ email, password }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(Object.values(data.errors));
-            });
-
-        if (newUser) setShowSignup(false)
+        const data = await dispatch(signUp(firstName, lastName, email, password))
+        if (data) {
+            let errors = []
+            let errorsProperties = Object.values(data)
+            let errorsKeys = Object.keys(data)
+            for (let i = 0; i < errorsKeys.length; i++) {
+                errors.push(errorsProperties[i])
+            }
+            setErrors(errors);
+        }
     };
 
     return (
         <form id='signup-form' onSubmit={handleSubmit}>
-            {errors.length > 0 && <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>}
             <div className='auth-form-logo'>
                 <i className='fa-solid fa-hippo auth-form-hippo' />
                 <span className='auth-form-name'>Clevernote</span>
@@ -130,6 +130,12 @@ function SignupFormPage({ setShowSignup, setShowLogin }) {
                         }}>Login</button>
                 </div>
             </div>
+            {errors.length > 0 && (
+                <div id='signup-errors'>
+                    {errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>)}
         </form>
     );
 }

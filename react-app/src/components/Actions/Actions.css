@@ -29,3 +29,8 @@
     color: #333;
     font-size: 14px;
 }
+
+#default-notebook-delete-button {
+    color: #aaaaaa;
+    cursor: default;
+}

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import NoteCard from '../NoteCard/NoteCard';
 import NoteForm from '../NoteForm/NoteForm';
-import { getAllNotes } from '../../store/note'
-import './NotesPage.css'
+import { getNotebookNotes } from '../../store/note'
 import DeleteNoteModal from '../DeleteNoteModal/DeleteNoteModal';
 
 
-const NotesPage = () => {
+const NotebookNotesPage = () => {
     const dispatch = useDispatch()
 
+    const { id } = useParams()
+
+    const notebook = useSelector(state => state.notebooks[id])
     const notesObject = useSelector(state => state.notes)
     const notesNumber = useSelector(state => Object.keys(state.notes).length)
     const notes = Object.values(notesObject)
@@ -28,7 +31,7 @@ const NotesPage = () => {
 
     useEffect(() => {
         (async function () {
-            await dispatch(getAllNotes());
+            await dispatch(getNotebookNotes(id));
             if (notes[0]) {
                 setTitle(notes[0].title)
                 setText(notes[0].text)
@@ -45,10 +48,14 @@ const NotesPage = () => {
             </div>
             <div className='main-content-container' id='notes-main-container'>
                 <div id='notes-list-container'>
-                    <div id='notes-list-header'>
-                        <i className="fa-solid fa-note-sticky" />
-                        <div>Notes</div>
-                    </div>
+                    {notebook?.default === false && <div id='notes-list-header'>
+                        <i className="fa-solid fa-book" />
+                        <div>{notebook.name}</div>
+                    </div>}
+                    {notebook?.default === true && <div id='notes-list-header'>
+                        <i className="fa-solid fa-book-bookmark" />
+                        <div>{notebook.name}</div>
+                    </div>}
                     <div id='notes-list-notes-number'>{notesNumber} notes</div>
                     <div id='note-cards-list'>
                         {notes.map(note => (
@@ -88,4 +95,4 @@ const NotesPage = () => {
     )
 }
 
-export default NotesPage;
+export default NotebookNotesPage;

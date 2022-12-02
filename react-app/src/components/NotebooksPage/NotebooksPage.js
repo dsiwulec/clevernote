@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import * as notebookActions from '../../store/notebook'
 import Sidebar from '../Sidebar/Sidebar';
 import NewNotebookModal from '../NewNotebookModal/NewNotebookModal';
@@ -50,11 +51,12 @@ const NotebooksPage = () => {
                     <div id='notebook-title-column'>
                         <div className='column-header'>TITLE</div>
                         {notebooks?.map(notebook => (
-                            <div key={notebook.id} className='title-column-content'>
+                            <NavLink to={`/notebooks/${notebook.id}/notes`} key={notebook.id} className='title-column-content'>
                                 <i className="fa-solid fa-angle-right" />
-                                <i className="fa-solid fa-book" />
+                                {notebook.default === true && <i className="fa-solid fa-book-bookmark" />}
+                                {notebook.default === false && <i className="fa-solid fa-book" />}
                                 <span>{notebook.name}</span>
-                            </div>
+                            </NavLink>
                         ))}
                     </div>
                     <div id='notebook-owner-column'>

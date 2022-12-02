@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { createNewNote } from '../../store/note'
 import LogoutButton from '../auth/LogoutButton';
 import './Sidebar.css'
@@ -8,6 +8,7 @@ import './Sidebar.css'
 
 const Sidebar = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const [showMenu, setShowMenu] = useState(false)
     const user = useSelector(state => state.session.user)
 
@@ -23,8 +24,16 @@ const Sidebar = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
+
     const newNote = async () => {
+        const previouslySelected = document.getElementsByClassName("selected-note")
+
+        if (previouslySelected.length > 0) {
+            previouslySelected[0].classList.remove('selected-note')
+        }
+
         await dispatch(createNewNote())
+        history.push('/notes/')
     }
 
 
@@ -73,6 +82,11 @@ const Sidebar = () => {
                     </div>
                     <span>Notebooks</span>
                 </NavLink>
+            </div>
+            <div id='about-links'>
+                <div>David Siwulec</div>
+                <a href="https://github.com/dsiwulec"><i className="fa-brands fa-github" /></a>
+                <a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in" /></a>
             </div>
         </div>
     )

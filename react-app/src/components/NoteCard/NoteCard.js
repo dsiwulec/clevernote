@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import timeSince from "../../utilities/timeSince";
 import './NoteCard.css'
 
-const NoteCard = ({ note, setNoteId, setTitle, setTitleCharCount, setText }) => {
+const NoteCard = ({ note, setNoteId, setNotebookId, setTitle, setTitleCharCount, setText }) => {
+
+    const notebooks = useSelector(state => Object.values(state.notebooks))
 
     const onClick = (e) => {
         const previouslySelected = document.getElementsByClassName("selected-note")
@@ -16,6 +19,11 @@ const NoteCard = ({ note, setNoteId, setTitle, setTitleCharCount, setText }) => 
         setTitle(note.title)
         if (note.title) setTitleCharCount(note.title.length)
         setText(note.text)
+        if (note.notebookId) {
+            setNotebookId(note.notebookId)
+        } else {
+            setNotebookId(notebooks.at(-1).id)
+        }
     }
 
     return (
