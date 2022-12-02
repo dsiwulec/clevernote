@@ -37,9 +37,6 @@ export const createNewNote = () => async dispatch => {
     const notebookResponse = await fetch('/api/notebooks/default')
     const defaultNotebook = await notebookResponse.json()
 
-    console.log('NOTEBOOK', defaultNotebook)
-    console.log('NOTEBOOK ID', defaultNotebook.id)
-
     const response = await fetch('/api/notes/', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
