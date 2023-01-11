@@ -85,3 +85,12 @@
     font-size: 14px;
     padding-right: 5px;
 }
+
+.ql-container {
+    height: calc(100vh - 222px);
+    width: 100%;
+}
+
+.ql-tooltip.ql-editing {
+    transform: translateX(115px);
+}
