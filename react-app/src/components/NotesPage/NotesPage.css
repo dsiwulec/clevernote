@@ -40,7 +40,7 @@
 }
 
 #note-details-header {
-    height: 42px;
+    height: 39px;
     width: calc(100vw - 635px);
     display: flex;
     align-items: center;
@@ -64,4 +64,5 @@
     color: red;
     font-size: 14px;
     justify-self: flex;
+    background-color: transparent;
 }

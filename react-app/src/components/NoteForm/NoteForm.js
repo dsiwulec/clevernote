@@ -60,18 +60,6 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
         })()
     }, [dispatch])
 
-    useEffect(() => {
-        if (quill) {
-            quill.on('text-change', (delta, oldDelta, source) => {
-                console.log('Text change!');
-                console.log(quill.getText()); // Get text only
-                console.log(quill.getContents()); // Get delta contents
-                console.log(quill.root.innerHTML); // Get innerHTML using quill
-                console.log(quillRef.current.firstChild.innerHTML); // Get innerHTML using quillRef
-            });
-        }
-    }, [quill]);
-
     const updateTitle = (e) => {
         setTitle(e.target.value);
         setTitleCharCount(e.target.value.length)
@@ -84,6 +72,19 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
     const updateNotebookId = (e) => {
         setNotebookId(e.target.value)
     }
+
+    useEffect(() => {
+        if (quill) {
+            quill.on('text-change', (delta, oldDelta, source) => {
+                // console.log('Text change!');
+                // console.log(quill.getText()); // Get text only
+                // console.log(quill.getContents()); // Get delta contents
+                // console.log(quill.root.innerHTML); // Get innerHTML using quill
+                // console.log(quillRef.current.firstChild.innerHTML); // Get innerHTML using quillRef
+                setText(quill.getText())
+            });
+        }
+    }, [quill]);
 
     return (
         <form id='note-form' onSubmit={onSubmit}>
