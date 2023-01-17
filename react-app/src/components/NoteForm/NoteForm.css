@@ -4,14 +4,7 @@
 
 #note-title-input {
     font-size: 30px;
-    line-height: 40px;
-    border: none;
-    color: #333333;
-}
-
-#note-title-input {
-    font-size: 30px;
-    line-height: 40px;
+    line-height: 38px;
     width: 100%;
     border: none;
     border-bottom: 1px solid #cccc;
@@ -91,6 +84,6 @@
     width: 100%;
 }
 
-.ql-tooltip.ql-editing {
+#note-form .ql-tooltip.ql-editing {
     transform: translateX(115px);
 }

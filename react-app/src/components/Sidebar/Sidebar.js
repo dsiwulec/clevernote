@@ -64,12 +64,12 @@ const Sidebar = () => {
                 </button>
             </div>
             <div id='nav-container'>
-                {/* <NavLink className='sidebar-nav-link' to={`/`} exact={true}>
+                <NavLink className='sidebar-nav-link' to={`/`} exact={true}>
                     <div className='sidebar-nav-link-icon'>
                         <i className="fa-solid fa-house sidebar-icons" />
                     </div>
                     <span>Home</span>
-                </NavLink> */}
+                </NavLink>
                 <NavLink className='sidebar-nav-link' to={`/notes`} exact={true}>
                     <div className='sidebar-nav-link-icon'>
                         <i className="fa-solid fa-note-sticky sidebar-icons" />
