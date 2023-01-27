@@ -39,14 +39,14 @@ const setSelectedNote = note => ({
 
 
 // Thunks
-export const createNewNote = () => async dispatch => {
+export const createNewNote = (scratch = false) => async dispatch => {
     const notebookResponse = await fetch('/api/notebooks/default')
     const defaultNotebook = await notebookResponse.json()
 
     const response = await fetch('/api/notes/', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: '', text: '', notebookId: defaultNotebook.id })
+        body: JSON.stringify({ title: '', text: '', notebookId: defaultNotebook.id, scratch: scratch })
     })
 
     if (response.ok) {
@@ -112,6 +112,7 @@ const noteReducer = (state = { all: {}, selected: {} }, action) => {
         }
 
         case LOAD_NOTES: {
+            state.all = {}
             action.notes.Notes.forEach(note => state.all[note.id] = note)
             return { ...state }
         }

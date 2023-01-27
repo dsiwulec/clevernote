@@ -49,6 +49,7 @@ def create_note():
             title=form.data["title"],
             text=form.data["text"],
             notebook_id=form.data["notebookId"],
+            scratch=form.data["scratch"],
         )
         new_note.set_created()
         db.session.add(new_note)
