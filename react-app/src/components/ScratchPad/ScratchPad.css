@@ -1,0 +1,48 @@
+#scratch-pad {
+    width: calc((100vw - 300px) / 3);
+    height: calc(100vh - 100px);
+    background-color: rgb(255, 244, 186);
+    border: 1px solid rgb(255, 237, 142);
+    border-radius: 8px;
+}
+
+#scratch-header {
+    height: 40px;
+    padding: 16px 16px 0px;
+    font-size: 14px;
+    color: #333333;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#scratch-body {
+    height: 645px;
+    font-size: 14px;
+    color: #737373;
+}
+
+#scratch-footer {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    padding-right: 15px;
+}
+
+#scratch-clear {
+    color: #737373;
+    background-color: transparent;
+    font-size: 14px;
+}
+
+#scratch-save {
+    color: white;
+    background-color: #00a82d;
+    font-size: 14px;
+    padding: 2px 8px;
+    border-radius: 5px;
+    text-align: center;
+}

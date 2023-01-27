@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useQuill } from 'react-quilljs';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateNote } from '../../store/note';
+import { updateNote, updateSelected } from '../../store/note';
 import { getAllNotebooks } from '../../store/notebook';
+import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 import './NoteForm.css'
 
-const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitleCharCount, notebookId, setNotebookId }) => {
+// const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitleCharCount, notebookId, setNotebookId }) => {
+const NoteForm = () => {
+    const [id, setId] = useState(0)
+    const [notebookId, setNotebookId] = useState(0)
+    const [title, setTitle] = useState('')
+    const [titleCharCount, setTitleCharCount] = useState(0)
+    const [text, setText] = useState('')
+
+    const notes = useSelector(state => Object.values(state.notes.all).filter(note => note.scratch === false))
+    const selectedNote = useSelector(state => state.notes.selected)
+
     const theme = 'snow';
 
     const modules = {
@@ -42,7 +52,7 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(updateNote({ id, notebookId, title, text }));
+        const data = await dispatch(updateNote({ id, notebookId, title, text: quill.getText(), bookmarked: selectedNote.bookmarked }));
         if (data) {
             let errors = []
             let errorsProperties = Object.values(data)
@@ -60,18 +70,6 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
         })()
     }, [dispatch])
 
-    useEffect(() => {
-        if (quill) {
-            quill.on('text-change', (delta, oldDelta, source) => {
-                console.log('Text change!');
-                console.log(quill.getText()); // Get text only
-                console.log(quill.getContents()); // Get delta contents
-                console.log(quill.root.innerHTML); // Get innerHTML using quill
-                console.log(quillRef.current.firstChild.innerHTML); // Get innerHTML using quillRef
-            });
-        }
-    }, [quill]);
-
     const updateTitle = (e) => {
         setTitle(e.target.value);
         setTitleCharCount(e.target.value.length)
@@ -84,6 +82,24 @@ const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitle
     const updateNotebookId = (e) => {
         setNotebookId(e.target.value)
     }
+
+    useEffect(() => {
+        if (!selectedNote) {
+            (async function () {
+                await dispatch(updateSelected(notes.at(-1)))
+            })()
+        }
+        if (selectedNote && selectedNote.id && quill) {
+            setId(selectedNote.id)
+            setNotebookId(selectedNote.notebookId)
+            setTitle(selectedNote.title)
+            quill.setText(selectedNote.text)
+        }
+    }, [selectedNote, quill, quillRef])
+
+    useEffect(() => {
+        if (quill) quill.on('text-change', (delta, oldDelta, source) => setText(quill.getText()));
+    }, [quill]);
 
     return (
         <form id='note-form' onSubmit={onSubmit}>

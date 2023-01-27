@@ -40,11 +40,13 @@
 }
 
 #note-details-header {
-    height: 42px;
+    height: 39px;
     width: calc(100vw - 635px);
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 10px;
+    padding-right: 22px;
 }
 
 #note-cards-list {
@@ -55,7 +57,7 @@
 
 #note-details-text-container {
     height: calc(100vh - 40px);
-    width: 100%;
+    flex: 1;
     overflow: auto;
     padding: 0px 20px;
 }
@@ -64,4 +66,13 @@
     color: red;
     font-size: 14px;
     justify-self: flex;
+    background-color: transparent;
+}
+
+.fa-regular.fa-bookmark {
+    color: #737373;
+}
+
+.fa-solid.fa-bookmark {
+    color: #fcb100;
 }

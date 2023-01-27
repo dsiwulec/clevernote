@@ -4,14 +4,7 @@
 
 #note-title-input {
     font-size: 30px;
-    line-height: 40px;
-    border: none;
-    color: #333333;
-}
-
-#note-title-input {
-    font-size: 30px;
-    line-height: 40px;
+    line-height: 38px;
     width: 100%;
     border: none;
     border-bottom: 1px solid #cccc;
@@ -54,7 +47,7 @@
 
 #notebook-select-container {
     position: fixed;
-    top: 9px;
+    top: 7px;
     right: 125px;
     display: flex;
     align-items: center;
@@ -89,8 +82,13 @@
 .ql-container {
     height: calc(100vh - 222px);
     width: 100%;
+    word-wrap: break-word;
 }
 
-.ql-tooltip.ql-editing {
+#note-form .ql-tooltip.ql-editing {
     transform: translateX(115px);
+}
+
+.ql-editor>p {
+    word-wrap: break-word;
 }
