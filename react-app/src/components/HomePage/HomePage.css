@@ -21,7 +21,7 @@
 
 .home-page-header {
     display: flex;
-    width: 100%;
+    flex: 1;
     justify-content: space-between;
     align-items: center;
     padding: 16px 24px;
@@ -53,10 +53,13 @@
 }
 
 .home-page-notes {
+    min-width: 350px;
     width: calc((100vw - 300px) / 3 * 2);
+    min-height: 275;
     height: calc((100vh - 134px) / 2);
     border: 1px solid #cccccc;
     border-radius: 8px;
+    overflow: auto;
 }
 
 .home-page-notes-header {
@@ -64,4 +67,38 @@
     font-size: 14px;
     font-weight: 500;
     margin: 16px 10px 16px;
+}
+
+#recent-note-cards-list {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc((100vh - 230px) / 2);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow: auto;
+    padding: 10px;
+}
+
+#recent-note-cards-list>.selected-note {
+    border-radius: 8px;
+}
+
+#recent-notes {
+    width: calc((100vw - 300px) / 3 * 2);
+}
+
+#recent-note-cards-list>.note-card-container {
+    display: inline-block;
+    width: 225px;
+    min-width: 175px;
+    height: calc((100vh - 360px) / 2);
+    min-height: 175px;
+    padding: 12px 10px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+}
+
+#recent-note-cards-list .note-card-note-text {
+    height: calc(100% - 50px)
 }

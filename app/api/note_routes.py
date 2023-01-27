@@ -86,6 +86,8 @@ def update_note(id):
                 current_note.title = form.data["title"]
             if form.data["text"]:
                 current_note.text = form.data["text"]
+            if form.data["bookmarked"] == True or form.data["bookmarked"] == False:
+                current_note.bookmarked = form.data["bookmarked"]
             current_note.set_updated()
             db.session.commit()
             return current_note.to_dict()

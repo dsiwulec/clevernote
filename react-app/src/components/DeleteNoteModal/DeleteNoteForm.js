@@ -1,11 +1,12 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { deleteNote } from '../../store/note'
 import './DeleteNoteForm.css'
 
-const DeleteNoteForm = ({ noteId, showDeleteModal, setShowDeleteModal, setTitle, setText }) => {
+const DeleteNoteForm = ({ showDeleteModal, setShowDeleteModal }) => {
 
     const dispatch = useDispatch()
+    const selectedNote = useSelector(state => state.notes.selected)
 
     useEffect(() => {
         if (showDeleteModal) {
@@ -26,9 +27,7 @@ const DeleteNoteForm = ({ noteId, showDeleteModal, setShowDeleteModal, setTitle,
             <div className="delete-notebook-footer">
                 <button onClick={() => setShowDeleteModal(false)} className='delete-cancel-button'>Cancel</button>
                 <button onClick={async () => {
-                    await dispatch(deleteNote(noteId))
-                    setTitle('')
-                    setText('')
+                    await dispatch(deleteNote(selectedNote.id))
                     setShowDeleteModal(false)
                 }}
                     className="submit-delete-button">Delete</button>

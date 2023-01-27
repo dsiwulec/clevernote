@@ -1,4 +1,4 @@
-from app.models import db, User, Notebook, environment, SCHEMA
+from app.models import db, User, Notebook, Note, environment, SCHEMA
 import datetime
 
 
@@ -21,7 +21,17 @@ def seed_users():
         created_at=datetime.datetime.now(datetime.timezone.utc),
     )
 
+    scratchPad = Note(
+        user_id=1,
+        title="",
+        text="",
+        scratch=True,
+        notebook_id=1,
+        created_at=datetime.datetime.now(datetime.timezone.utc),
+    )
+
     db.session.add(defaultNotebook)
+    db.session.add(scratchPad)
     db.session.commit()
 
 

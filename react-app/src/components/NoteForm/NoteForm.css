@@ -47,7 +47,7 @@
 
 #notebook-select-container {
     position: fixed;
-    top: 9px;
+    top: 7px;
     right: 125px;
     display: flex;
     align-items: center;
@@ -82,8 +82,13 @@
 .ql-container {
     height: calc(100vh - 222px);
     width: 100%;
+    word-wrap: break-word;
 }
 
 #note-form .ql-tooltip.ql-editing {
     transform: translateX(115px);
+}
+
+.ql-editor>p {
+    word-wrap: break-word;
 }

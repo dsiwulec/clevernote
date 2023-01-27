@@ -45,6 +45,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 10px;
+    padding-right: 22px;
 }
 
 #note-cards-list {
@@ -65,4 +67,12 @@
     font-size: 14px;
     justify-self: flex;
     background-color: transparent;
+}
+
+.fa-regular.fa-bookmark {
+    color: #737373;
+}
+
+.fa-solid.fa-bookmark {
+    color: #fcb100;
 }

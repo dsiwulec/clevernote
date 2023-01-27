@@ -3,6 +3,7 @@ import { useQuill } from 'react-quilljs';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateNote } from '../../store/note';
 import { getAllNotebooks } from '../../store/notebook';
+import { getAllNotes } from '../../store/note';
 import 'quill/dist/quill.bubble.css';
 import './ScratchPad.css'
 
@@ -40,26 +41,36 @@ const ScratchPad = () => {
     const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
 
+    const scratch = useSelector(state => Object.values(state.notes.all).filter(note => note.scratch === true).at(0))
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        // const data = await dispatch(updateNote({ id, notebookId, title, text }));
-        // if (data) {
-        //     let errors = []
-        //     let errorsProperties = Object.values(data)
-        //     let errorsKeys = Object.keys(data)
-        //     for (let i = 0; i < errorsKeys.length; i++) {
-        //         errors.push(errorsKeys[i] + ': ' + errorsProperties[i])
-        //     }
-        //     setErrors(errors);
-        // }
+        const data = await dispatch(updateNote({ id: scratch.id, notebookId: scratch.notebookId, title: "", text }));
+        if (data) {
+            let errors = []
+            let errorsProperties = Object.values(data)
+            let errorsKeys = Object.keys(data)
+            for (let i = 0; i < errorsKeys.length; i++) {
+                errors.push(errorsKeys[i] + ': ' + errorsProperties[i])
+            }
+            setErrors(errors);
+        }
     };
 
     useEffect(() => {
         (async function () {
             await dispatch(getAllNotebooks());
+            await dispatch(getAllNotes())
         })()
     }, [dispatch])
+
+    useEffect(() => {
+        (async function () {
+            if (scratch) {
+                quill?.setText(scratch.text)
+            }
+        })()
+    }, [dispatch, quill, scratch])
 
     useEffect(() => {
         if (quill) {
@@ -74,21 +85,14 @@ const ScratchPad = () => {
         }
     }, [quill]);
 
+
     return (
         <form id='scratch-pad' onSubmit={onSubmit}>
             <div id='scratch-header'>
                 SCRATCH PAD
                 <button id='scratch-save' type="submit">Save</button>
             </div>
-            <div id='scratch-body' ref={quillRef}>
-                <textarea
-                    id='note-text-input'
-                    name='text'
-                    type='text'
-                    placeholder='Start writing...'
-                    value={text}
-                />
-            </div>
+            <div id='scratch-body' ref={quillRef} />
             {errors.length > 0 && (
                 <div id='login-errors'>
                     {errors.map((error, ind) => (
