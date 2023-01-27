@@ -54,14 +54,16 @@
 
 #splash-text>h1 {
     font-size: 56px;
+    margin-top: 40px;
+    margin-bottom: 35px;
 }
 
 #splash-text>h2 {
     font-size: 24px;
-    font-weight: 300;
+    font-weight: 00;
     width: 975px;
     margin: 0;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 #splash-signup-button {
@@ -107,11 +109,14 @@
     font-size: 17px;
     font-weight: bold;
     letter-spacing: 1px;
+    margin-bottom: 15px;
 }
 
 .splash-image-body-text {
     font-size: 16px;
     height: 72px;
+    line-height: 24px;
+    margin-bottom: 15px;
 }
 
 #header-auth {
