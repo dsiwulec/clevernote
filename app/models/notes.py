@@ -9,12 +9,15 @@ class Note(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("users.id")))
     notebook_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("notebooks.id"))
     )
     title = db.Column(db.String(75))
     text = db.Column(db.Text())
+    scratch = db.Column(db.Boolean(), default=False)
+    bookmarked = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime())
     updated_at = db.Column(db.DateTime())
 
@@ -37,13 +40,8 @@ class Note(db.Model):
             "notebookId": self.notebook_id,
             "title": self.title,
             "text": self.text,
+            "bookmarked": self.bookmarked,
+            "scratch": self.scratch,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }
-
-
-# from sqlalchemy import func
-
-
-# created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
-# updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())

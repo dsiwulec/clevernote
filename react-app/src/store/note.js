@@ -49,6 +49,22 @@ export const createNewNote = () => async dispatch => {
     }
 }
 
+export const createScratch = () => async dispatch => {
+    const notebookResponse = await fetch('/api/notebooks/default')
+    const defaultNotebook = await notebookResponse.json()
+
+    const response = await fetch('/api/notes/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: '', text: '', notebookId: defaultNotebook.id, scratch: true })
+    })
+
+    if (response.ok) {
+        const newNote = await response.json()
+        dispatch(addNote(newNote))
+    }
+}
+
 export const getAllNotes = () => async dispatch => {
     const response = await fetch('/api/notes/')
 
@@ -112,7 +128,7 @@ const noteReducer = (state = {}, action) => {
 
         case UPDATE_NOTE: {
             state[action.note.id] = action.note
-            return { ...state.notes }
+            return { ...state }
         }
 
         case DELETE_NOTE: {
@@ -124,7 +140,7 @@ const noteReducer = (state = {}, action) => {
             for (const note in state) {
                 if (note.notebookId === action.notebookId) delete state[note.id]
             }
-            return { ...state.notes }
+            return { ...state }
         }
 
         default:
