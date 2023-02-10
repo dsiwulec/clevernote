@@ -3,6 +3,9 @@
     padding: 20px 24px;
     cursor: pointer;
     margin-left: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .note-card-note-title {
@@ -13,12 +16,9 @@
 .note-card-note-text {
     width: 100%;
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
     font-size: 14px;
     color: #737373;
-    height: 43px;
+    height: 100px;
     margin: 10px 0px;
 }
 

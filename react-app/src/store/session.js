@@ -1,6 +1,6 @@
 import { createNewNotebook } from "./notebook";
 import { getAllNotebooks } from "./notebook";
-import { createScratch, getAllNotes } from "./note"
+import { createNewNote, getAllNotes } from "./note"
 
 // constants
 const SET_USER = 'session/SET_USER';
@@ -94,7 +94,7 @@ export const signUp = (firstName, lastName, email, password) => async (dispatch)
     const data = await response.json();
     await dispatch(setUser(data))
     await dispatch(createNewNotebook({ name: "First Notebook", default: true }))
-    await dispatch(createScratch())
+    await dispatch(createNewNote(true))
     return null
   } else if (response.status < 500) {
     const data = await response.json();

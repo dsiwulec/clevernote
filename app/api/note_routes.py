@@ -49,6 +49,7 @@ def create_note():
             title=form.data["title"],
             text=form.data["text"],
             notebook_id=form.data["notebookId"],
+            scratch=form.data["scratch"],
         )
         new_note.set_created()
         db.session.add(new_note)
@@ -86,6 +87,8 @@ def update_note(id):
                 current_note.title = form.data["title"]
             if form.data["text"]:
                 current_note.text = form.data["text"]
+            if form.data["bookmarked"] == True or form.data["bookmarked"] == False:
+                current_note.bookmarked = form.data["bookmarked"]
             current_note.set_updated()
             db.session.commit()
             return current_note.to_dict()

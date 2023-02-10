@@ -41,8 +41,7 @@ const ScratchPad = () => {
     const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
 
-    const notesObject = useSelector(state => state.notes)
-    const scratch = Object.values(notesObject).filter(note => note.scratch === true)[0]
+    const scratch = useSelector(state => Object.values(state.notes.all).filter(note => note.scratch === true).at(0))
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -93,15 +92,7 @@ const ScratchPad = () => {
                 SCRATCH PAD
                 <button id='scratch-save' type="submit">Save</button>
             </div>
-            <div id='scratch-body' ref={quillRef}>
-                <textarea
-                    id='note-text-input'
-                    name='text'
-                    type='text'
-                    placeholder='Start writing...'
-                    value={text}
-                />
-            </div>
+            <div id='scratch-body' ref={quillRef} />
             {errors.length > 0 && (
                 <div id='login-errors'>
                     {errors.map((error, ind) => (
