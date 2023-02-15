@@ -1,0 +1,74 @@
+#tags-form {
+    height: 600px;
+    width: 380px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#tags-form-header {
+    border-bottom: 2px solid #666666;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #666666;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#new-tag-container {
+    border: 1px solid #cccccc;
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    border-radius: 3px;
+    padding: 0px 10px;
+}
+
+#new-tag-container>input {
+    border: none;
+    flex: 1;
+    color: #666666;
+}
+
+#new-tag-container>input:focus {
+    outline: none;
+}
+
+#new-tag-button {
+    color: #666666;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+#tags-list-container {
+    display: flex;
+    flex-direction: column;
+    height: 460px;
+    overflow: auto;
+}
+
+#tag-card {
+    padding: 10px 15px;
+    color: #666666;
+    cursor: pointer;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#tag-card:hover {
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+
+#tag-name {
+    width: 100%;
+    color: #666666
+}

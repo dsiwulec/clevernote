@@ -92,11 +92,23 @@ export const getNotebookNotes = (id) => async dispatch => {
     }
 }
 
+export const getTagNotes = (id) => async dispatch => {
+    const response = await fetch(`/api/notes/tags/${id}`)
+
+    if (response.ok) {
+        const notes = await response.json()
+        dispatch(loadNotes(notes))
+    } else {
+        const errors = await response.json()
+        return errors;
+    }
+}
+
 export const updateNote = note => async dispatch => {
     const response = await fetch(`/api/notes/${note.id}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ notebookId: note.notebookId, title: note.title, text: note.text, bookmarked: note.bookmarked })
+        body: JSON.stringify({ notebookId: note.notebookId, title: note.title, text: note.text, bookmarked: note.bookmarked, tagId: note.tagId })
     })
 
     if (response.ok) {

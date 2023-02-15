@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 15px;
     padding-right: 22px;
 }
 
@@ -75,4 +75,8 @@
 
 .fa-solid.fa-bookmark {
     color: #fcb100;
+}
+
+.fa-solid.fa-tag {
+    color: #737373;
 }
