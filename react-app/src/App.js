@@ -6,6 +6,7 @@ import HomePage from './components/HomePage/HomePage';
 import NotesPage from './components/NotesPage/NotesPage';
 import NotebooksPage from './components/NotebooksPage/NotebooksPage';
 import NotebookNotesPage from './components/NotebookNotesPage/NotebookNotesPage';
+import TagNotesPage from './components/TagNotesPage/TagNotesPage'
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 
@@ -33,6 +34,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/notebooks/:id/notes' exact={true}>
           <NotebookNotesPage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/notes/tags/:id' exact={true}>
+          <TagNotesPage />
         </ProtectedRoute>
         <ProtectedRoute path='/notebooks' exact={true}>
           <NotebooksPage />

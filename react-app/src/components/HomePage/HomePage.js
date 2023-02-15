@@ -23,8 +23,6 @@ const HomePage = () => {
     const day = weekday[currentDate.getDay()]
     const month = months[currentDate.getMonth()]
 
-    // const onClick = () => history.push('/notes')
-
     return (
         <div className='main-container'>
             <div className='main-sidebar-container'>

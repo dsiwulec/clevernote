@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { createNewNote } from '../../store/note'
 import LogoutButton from '../auth/LogoutButton';
+import TagsModal from '../TagsModal/TagsModal';
+import { getAllTags } from '../../store/tag';
 import './Sidebar.css'
 
 
@@ -10,6 +12,7 @@ const Sidebar = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false)
+    const [showTags, setShowTags] = useState(false)
     const user = useSelector(state => state.session.user)
 
     useEffect(() => {
@@ -35,6 +38,12 @@ const Sidebar = () => {
         await dispatch(createNewNote())
         history.push('/notes/')
     }
+
+    useEffect(() => {
+        (async function () {
+            await dispatch(getAllTags())
+        })()
+    }, [dispatch])
 
 
     return (
@@ -82,12 +91,19 @@ const Sidebar = () => {
                     </div>
                     <span>Notebooks</span>
                 </NavLink>
+                <div className='sidebar-nav-link' onClick={() => setShowTags(!showTags)}>
+                    <div className='sidebar-nav-link-icon'>
+                        <i className="fa-solid fa-tag sidebar-icons" />
+                    </div>
+                    <span>Tags</span>
+                </div>
             </div>
             <div id='about-links'>
                 <div>David Siwulec</div>
                 <a href="https://github.com/dsiwulec"><i className="fa-brands fa-github" /></a>
                 <a href="https://www.linkedin.com/"><i className="fa-brands fa-linkedin-in" /></a>
             </div>
+            {showTags && <TagsModal showTags={showTags} setShowTags={setShowTags} />}
         </div>
     )
 }

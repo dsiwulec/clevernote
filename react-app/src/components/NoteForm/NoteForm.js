@@ -6,15 +6,16 @@ import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 import './NoteForm.css'
 
-// const NoteForm = ({ id, title, setTitle, text, setText, titleCharCount, setTitleCharCount, notebookId, setNotebookId }) => {
 const NoteForm = () => {
     const [id, setId] = useState(0)
     const [notebookId, setNotebookId] = useState(0)
     const [title, setTitle] = useState('')
     const [titleCharCount, setTitleCharCount] = useState(0)
     const [text, setText] = useState('')
+    const [tag, setTag] = useState(0)
 
     const notes = useSelector(state => Object.values(state.notes.all).filter(note => note.scratch === false))
+    const tags = useSelector(state => Object.values(state.tags))
     const selectedNote = useSelector(state => state.notes.selected)
 
     const theme = 'snow';
@@ -52,7 +53,8 @@ const NoteForm = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(updateNote({ id, notebookId, title, text: quill.getText(), bookmarked: selectedNote.bookmarked }));
+        console.log(tag)
+        const data = await dispatch(updateNote({ id, notebookId, title, text: quill.getText(), bookmarked: selectedNote.bookmarked, tagId: tag }));
         if (data) {
             let errors = []
             let errorsProperties = Object.values(data)
@@ -83,6 +85,10 @@ const NoteForm = () => {
         setNotebookId(e.target.value)
     }
 
+    const updateTagId = (e) => {
+        setTag(e.target.value)
+    }
+
     useEffect(() => {
         if (!selectedNote) {
             (async function () {
@@ -92,6 +98,8 @@ const NoteForm = () => {
         if (selectedNote && selectedNote.id && quill) {
             setId(selectedNote.id)
             setNotebookId(selectedNote.notebookId)
+            if (selectedNote.tagId === null) setTag(0)
+            else setTag(selectedNote.tagId)
             setTitle(selectedNote.title)
             quill.setText(selectedNote.text)
         }
@@ -125,21 +133,39 @@ const NoteForm = () => {
                     onChange={updateText}
                 />
             </div>
-            {notebooks.length > 0 && <div id='notebook-select-container'>
-                <div id='assigned-to'>Assigned to:</div>
-                <select
-                    id="notebook-select"
-                    name='notebook'
-                    value={notebookId}
-                    onFocus={updateNotebookId}
-                    onChange={updateNotebookId}
-                >
-                    {notebooks.map(notebook => (
-                        <option key={notebook.id} value={notebook.id}>{notebook.name}</option>
-                    ))}
-                </select>
+            <div id='note-select-fields-container'>
+                {notebooks.length > 0 && <div id='notebook-select-container'>
+                    <div id='assigned-to'>Assigned to:</div>
+                    <select
+                        id="notebook-select"
+                        name='notebook'
+                        value={notebookId}
+                        onFocus={updateNotebookId}
+                        onChange={updateNotebookId}
+                    >
+                        {notebooks.map(notebook => (
+                            <option key={notebook.id} value={notebook.id}>{notebook.name}</option>
+                        ))}
+                    </select>
+                </div>
+                }
+                {tags.length > 0 && <div id='tag-select-container'>
+                    <div id='assigned-tag'>{tags.length > 0 && <i className="fa-solid fa-tag"></i>}</div>
+                    <select
+                        id="notebook-select"
+                        name='tag'
+                        value={tag}
+                        onFocus={updateTagId}
+                        onChange={updateTagId}
+                    >
+                        <option value={0}>Select a tag</option>
+                        {tags.map(tag => (
+                            <option key={tag.id} value={tag.id}>{tag.tag}</option>
+                        ))}
+                    </select>
+                </div>
+                }
             </div>
-            }
             <div id='note-form-footer'>
                 <button id='note-form-button' type="submit">Save</button>
             </div>

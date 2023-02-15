@@ -5,11 +5,11 @@ import { useQuill } from 'react-quilljs';
 import Sidebar from '../Sidebar/Sidebar';
 import NoteCard from '../NoteCard/NoteCard';
 import NoteForm from '../NoteForm/NoteForm';
-import { getNotebookNotes, updateSelected, updateNote } from '../../store/note'
+import { getTagNotes, updateSelected, updateNote } from '../../store/note'
 import DeleteNoteModal from '../DeleteNoteModal/DeleteNoteModal';
 
 
-const NotebookNotesPage = () => {
+const TagNotesPage = () => {
     const theme = 'snow';
 
     const modules = {
@@ -42,7 +42,7 @@ const NotebookNotesPage = () => {
 
     const { id } = useParams()
 
-    const notebook = useSelector(state => state.notebooks[id])
+    const tag = useSelector(state => state.tags[id])
     const notes = useSelector(state => Object.values(state.notes.all).filter(note => note.scratch === false))
     const notesNumber = useSelector(state => Object.values(state.notes.all).filter(note => note.scratch === false).length)
 
@@ -51,14 +51,15 @@ const NotebookNotesPage = () => {
 
     const [showDeleteModal, setShowDeleteModal] = useState(false)
 
+    const selectedNote = useSelector(state => state.notes.selected)
+
     useEffect(() => {
         (async function () {
-            await dispatch(getNotebookNotes(id));
+            await dispatch(getTagNotes(id));
+            console.log(notes.at(0))
             await dispatch(updateSelected(notes.at(0)))
         })()
-    }, [dispatch, notesNumber])
-
-    const selectedNote = useSelector(state => state.notes.selected)
+    }, [dispatch, notesNumber, tag, id])
 
     const addBookmark = async () => {
         console.log(!selectedNote.bookmarked)
@@ -79,14 +80,10 @@ const NotebookNotesPage = () => {
             </div>
             <div className='main-content-container' id='notes-main-container'>
                 <div id='notes-list-container'>
-                    {notebook?.default === false && <div id='notes-list-header'>
-                        <i className="fa-solid fa-book" />
-                        <div>{notebook.name}</div>
-                    </div>}
-                    {notebook?.default === true && <div id='notes-list-header'>
-                        <i className="fa-solid fa-book-bookmark" />
-                        <div>{notebook.name}</div>
-                    </div>}
+                    <div id='notes-list-header'>
+                        <i className="fa-solid fa-tag" />
+                        <div>{tag?.tag}</div>
+                    </div>
                     <div id='notes-list-notes-number'>{notesNumber} notes</div>
                     <div id='note-cards-list'>
                         {notes.map(note => (
@@ -116,4 +113,4 @@ const NotebookNotesPage = () => {
     )
 }
 
-export default NotebookNotesPage;
+export default TagNotesPage;

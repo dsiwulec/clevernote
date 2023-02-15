@@ -45,10 +45,21 @@
     border-radius: 5px;
 }
 
-#notebook-select-container {
+#note-select-fields-container {
     position: fixed;
     top: 7px;
-    right: 125px;
+    right: 134px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#notebook-select-container {
+    display: flex;
+    align-items: center;
+}
+
+#tag-select-container {
     display: flex;
     align-items: center;
 }

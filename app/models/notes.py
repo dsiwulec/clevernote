@@ -13,6 +13,7 @@ class Note(db.Model):
     notebook_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("notebooks.id"))
     )
+    tag_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("tags.id")))
     title = db.Column(db.String(75))
     text = db.Column(db.Text())
     scratch = db.Column(db.Boolean(), default=False)
@@ -22,6 +23,7 @@ class Note(db.Model):
 
     user = db.relationship("User", back_populates="notes")
     notebook = db.relationship("Notebook", back_populates="notes")
+    tag = db.relationship("Tag", back_populates="notes")
 
     def set_created(self):
         self.created_at = datetime.datetime.now(datetime.timezone.utc)
@@ -37,6 +39,7 @@ class Note(db.Model):
             "id": self.id,
             "userId": self.user_id,
             "notebookId": self.notebook_id,
+            "tagId": self.tag_id,
             "title": self.title,
             "text": self.text,
             "bookmarked": self.bookmarked,

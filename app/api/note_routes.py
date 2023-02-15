@@ -32,6 +32,29 @@ def get_all_notes():
     return response
 
 
+@note_routes.route("/tags/<int:id>")
+@login_required
+def get_tag_notes(id):
+    """
+    Queries for all notes assoicated with a tag, and all associated data,
+    and returns it in a list of dictionaries
+    """
+
+    notes = (
+        Note.query.filter_by(tag_id=id)
+        .options(joinedload(Note.user), joinedload(Note.notebook))
+        .all()
+    )
+
+    response = {"Notes": []}
+
+    for note in notes:
+        note_dict = note.to_dict()
+        response["Notes"].append(note_dict)
+
+    return response
+
+
 @note_routes.route("/", methods=["POST"])
 @login_required
 def create_note():
@@ -89,6 +112,8 @@ def update_note(id):
                 current_note.text = form.data["text"]
             if form.data["bookmarked"] == True or form.data["bookmarked"] == False:
                 current_note.bookmarked = form.data["bookmarked"]
+            if form.data["tagId"]:
+                current_note.tag_id = form.data["tagId"]
             current_note.set_updated()
             db.session.commit()
             return current_note.to_dict()

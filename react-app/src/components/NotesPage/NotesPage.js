@@ -5,6 +5,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import NoteCard from '../NoteCard/NoteCard';
 import NoteForm from '../NoteForm/NoteForm';
 import { getAllNotes, updateNote, updateSelected } from '../../store/note'
+import { getAllTags } from '../../store/tag'
 import './NotesPage.css'
 import DeleteNoteModal from '../DeleteNoteModal/DeleteNoteModal';
 
@@ -88,7 +89,7 @@ const NotesPage = () => {
                 </div>
                 <div id='note-details-container'>
                     <div id='note-details-header'>
-                        {selectedNote?.bookmarked === true ?
+                        {notesNumber > 0 && selectedNote?.bookmarked === true ?
                             <button onClick={removeBookmark}>
                                 <i className="fa-solid fa-bookmark"></i>
                             </button>

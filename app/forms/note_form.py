@@ -7,6 +7,7 @@ class NoteForm(FlaskForm):
     notebookId = IntegerField("Notebook ID")
     title = StringField("Title", validators=[Length(max=35), Optional()])
     text = TextAreaField("Text")
+    tagId = IntegerField("Tag ID")
     bookmarked = BooleanField(
         "Bookmarked",
         false_values={False, "false", ""},
